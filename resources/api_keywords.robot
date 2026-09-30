@@ -49,3 +49,13 @@ Excluir Usuario Criado
 Preparar Teste De Usuario
     [Documentation]    Inicializa o ID utilizado na limpeza.
     Set Test Variable    ${USUARIO_ID}    ${EMPTY}
+
+
+Consultar Usuario Por ID
+    [Documentation]    Consulta um usuário pelo seu identificador.
+    [Arguments]    ${id}
+    ${response}=    GET On Session
+    ...    api
+    ...    /usuarios/${id}
+    ...    expected_status=any
+    RETURN    ${response}
