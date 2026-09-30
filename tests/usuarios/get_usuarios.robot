@@ -49,5 +49,3 @@ CT03 - Validar Campos Dos Usuarios
         Dictionary Should Contain Key    ${usuario}    password
         Dictionary Should Contain Key    ${usuario}    administrador
     END
-
-CT04
