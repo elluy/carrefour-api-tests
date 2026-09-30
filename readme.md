@@ -64,6 +64,7 @@ Automatizar os principais cenários funcionais da API, buscando garantir:
 ├── .gitignore
 ├── requirements.txt
 └── README.md
+```
 
 ## Estratégia de automação
 
@@ -189,6 +190,7 @@ No Windows:
 
 ```powershell
 python -m venv .venv
+```
 
 ### 2. Ativar o ambiente virtual
 
@@ -196,17 +198,20 @@ No PowerShell:
 
 ```powershell
 .venv\Scripts\Activate.ps1
+```
 
 No Prompt de Comando:
 
 ```cmd
 .venv\Scripts\activate
-
+```
 ### 3. Instalar as dependências
 
 ```cmd
 pip install -r requirements.txt
+```
 
 ### 4. Executar todos os testes
 ```cmd
 robot -d results tests/
+```
