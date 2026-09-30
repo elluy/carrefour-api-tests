@@ -87,3 +87,15 @@ Excluir Usuario Por ID
     ...    expected_status=any
 
     Should Be Equal As Integers    ${response.status_code}    200
+
+
+Deletar Usuario
+    [Documentation]    Executa a exclusão de um usuário pelo ID.
+    [Arguments]    ${id}
+
+    ${response}=    DELETE On Session
+    ...    api
+    ...    /usuarios/${id}
+    ...    expected_status=any
+
+    RETURN    ${response}
