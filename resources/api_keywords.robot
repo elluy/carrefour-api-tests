@@ -99,3 +99,21 @@ Deletar Usuario
     ...    expected_status=any
 
     RETURN    ${response}
+
+
+
+Realizar Login
+    [Documentation]    Autentica um usuário na API.
+    [Arguments]    ${email}    ${senha}
+
+    &{credenciais}=    Create Dictionary
+    ...    email=${email}
+    ...    password=${senha}
+
+    ${response}=    POST On Session
+    ...    api
+    ...    /login
+    ...    json=${credenciais}
+    ...    expected_status=any
+
+    RETURN    ${response}

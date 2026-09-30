@@ -37,3 +37,20 @@ Validar Campo Obrigatorio Na Atualizacao
     ${body}=    Evaluate    $response.json()
     Dictionary Should Contain Key    ${body}    ${campo}
     Should Be Equal    ${body}[${campo}]    ${mensagem_esperada}
+
+
+Validar Tempo De Resposta
+    [Documentation]    Valida se o tempo de resposta está dentro do limite definido.
+    [Arguments]    ${response}    ${tempo_maximo_ms}
+
+    ${tempo_ms}=    Evaluate
+    ...    $response.elapsed.total_seconds() * 1000
+
+    ${tempo_formatado}=    Evaluate
+    ...    f"{${tempo_ms}:.2f}"
+
+    Log    Tempo de resposta: ${tempo_formatado} ms
+
+    Should Be True
+    ...    ${tempo_ms} <= ${tempo_maximo_ms}
+    ...    A resposta demorou ${tempo_formatado} ms. Limite: ${tempo_maximo_ms} ms.
