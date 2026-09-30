@@ -28,26 +28,29 @@ Cadastrar Usuario
         ${body}=    Evaluate    $response.json()
         ${id}=    Get From Dictionary    ${body}    _id
         Set Test Variable    ${USUARIO_ID}    ${id} 
+        Append To List    ${USUARIOS_CRIADOS}    ${id}
     END
 
     RETURN    ${response}
 
 
 Excluir Usuario Criado
-    [Documentation]    Remove o usuário criado durante o teste.
+    [Documentation]    Tenta excluir todos os usuários criados sem reprovar o teste. Se falhar não impede que o teste passe.
 
-    IF    $USUARIO_ID
-        ${response}=    DELETE On Session
-        ...    api
-        ...    /usuarios/${USUARIO_ID}
-        ...    expected_status=any
+    FOR    ${id}    IN    @{USUARIOS_CRIADOS}
+        ${sucesso}=    Run Keyword And Return Status
+        ...    Excluir Usuario Por ID
+        ...    ${id}
 
-        Should Be Equal As Integers    ${response.status_code}    200
+        IF    not ${sucesso}
+            Log    Falha ao excluir o usuário ${id}    WARN
+        END
     END
 
-
 Preparar Teste De Usuario
-    [Documentation]    Inicializa o ID utilizado na limpeza.
+    [Documentation]    Inicializa a lista de usuários criados no teste.
+    ${ids}=    Create List
+    Set Test Variable    ${USUARIOS_CRIADOS}    ${ids}
     Set Test Variable    ${USUARIO_ID}    ${EMPTY}
 
 
@@ -59,3 +62,28 @@ Consultar Usuario Por ID
     ...    /usuarios/${id}
     ...    expected_status=any
     RETURN    ${response}
+
+
+Atualizar Usuario
+    [Documentation]    Atualiza os dados de um usuário pelo ID.
+    [Arguments]    ${id}    ${usuario}
+
+    ${response}=    PUT On Session
+    ...    api
+    ...    /usuarios/${id}
+    ...    json=${usuario}
+    ...    expected_status=any
+
+    RETURN    ${response}
+
+
+Excluir Usuario Por ID
+    [Documentation]    Exclui um usuário e valida o retorno da API.
+    [Arguments]    ${id}
+
+    ${response}=    DELETE On Session
+    ...    api
+    ...    /usuarios/${id}
+    ...    expected_status=any
+
+    Should Be Equal As Integers    ${response.status_code}    200
