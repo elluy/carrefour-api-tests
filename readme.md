@@ -215,3 +215,69 @@ pip install -r requirements.txt
 ```cmd
 robot -d results tests/
 ```
+
+## Execução da pipeline
+
+A execução dos testes também pode ser realizada através do GitHub Actions.
+
+### Execução automática
+
+A pipeline é executada automaticamente quando ocorre:
+
+- Push na branch `main`;
+- Pull Request direcionado para a branch `main`.
+
+### Execução manual
+
+Também é possível executar a pipeline manualmente através do GitHub:
+
+1. Acesse a aba **Actions** do repositório;
+2. Selecione o workflow **Testes Automatizados API Carrefour**;
+3. Clique em **Run workflow**;
+4. Selecione a branch desejada;
+5. Clique novamente em **Run workflow**.
+
+### Resultado da execução
+
+Após a execução, o GitHub Actions apresenta:
+
+- Status da pipeline;
+- Quantidade total de testes;
+- Quantidade de testes aprovados;
+- Quantidade de testes reprovados;
+- Resultado geral da execução.
+
+Os relatórios completos do Robot Framework ficam disponíveis como artifacts da execução.
+
+### Relatórios
+
+Os seguintes arquivos são disponibilizados como artifacts:
+
+```text
+results/
+├── log.html
+├── report.html
+└── output.xml
+```
+
+O `log.html` permite consultar detalhadamente a execução dos testes, enquanto o `report.html` apresenta um resumo dos resultados.
+
+## Considerações sobre a API
+
+O desafio disponibiliza a ServeRest como sugestão de API para implementação dos testes.
+
+Os endpoints descritos no desafio como:
+
+- `/users`
+- `/users/{id}`
+
+são disponibilizados pela ServeRest como:
+
+- `/usuarios`
+- `/usuarios/{id}`
+
+A automação foi desenvolvida considerando os endpoints efetivamente disponibilizados pela API utilizada.
+
+Durante a implementação, os cenários foram construídos com base no comportamento observado nas respostas da API, incluindo códigos HTTP, mensagens retornadas e estrutura dos dados.
+
+O requisito de limite de 100 requisições por minuto foi identificado no enunciado, porém não faz parte da suíte funcional atual. Testes específicos de rate limiting podem ser adicionados posteriormente por exemplo utilizando o K6.
