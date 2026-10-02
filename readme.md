@@ -5,7 +5,11 @@ Projeto de automação de testes de API desenvolvido como parte do desafio técn
 A solução utiliza Robot Framework com Python para automatizar os principais fluxos da API, incluindo operações de usuários, autenticação, validações positivas e negativas e validação de tempo de resposta.
 
 ---
+## Observação
 
+Os testes rodam na pipeline tmb através do Run Workflow, caso queira ter acesso para acionar e ver o resultado na pipeline, é só solicitar por email, informando o nome de usuário do github.
+
+---
 ## Objetivo
 
 Automatizar os principais cenários funcionais da API, buscando garantir:
