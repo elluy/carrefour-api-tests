@@ -266,6 +266,11 @@ results/
 
 O `log.html` permite consultar detalhadamente a execução dos testes, enquanto o `report.html` apresenta um resumo dos resultados.
 
+## Resumo na pipeline
+
+<img width="1220" height="842" alt="image" src="https://github.com/user-attachments/assets/e4c5b1f2-49c4-4827-8a77-72b022915623" />
+
+
 ## Considerações sobre a API
 
 O desafio disponibiliza a ServeRest como sugestão de API para implementação dos testes.
